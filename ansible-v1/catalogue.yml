@@ -65,11 +65,11 @@
     - name: Apply permissions and ownership
       ansible.builtin.file:
         path: /app
-        user: appuser
+        owner: appuser
         group: appuser
         recurse: yes
         mode: 'o-rwx'
-        
+
     - name: Start Catalogue service
       ansible.builtin.systemd_service:
         name: catalogue
