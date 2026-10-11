@@ -69,6 +69,7 @@
         group: appuser
         recurse: yes
         mode: 'o-rwx'
+        
     - name: Start Catalogue service
       ansible.builtin.systemd_service:
         name: catalogue
