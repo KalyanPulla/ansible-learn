@@ -43,6 +43,14 @@
       args:
         chdir: /app
 
+    - name: Apply permissions and ownership
+      ansible.builtin.file:
+        path: /app
+        owner: appuser
+        group: appuser
+        recurse: yes
+        mode: 'o-rwx'
+
     - name: Enable and Restart User service
       ansible.builtin.systemd_service:
         name: cart
