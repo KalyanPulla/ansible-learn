@@ -9,7 +9,7 @@
     - name: Start Mysql service
       ansible.builtin.systemd_service:
         name: mysqld
-        state: started
+        state: restarted
         enabled: yes
     - name: Create Mysql user
       ansible.builtin.shell: |

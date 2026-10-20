@@ -46,6 +46,6 @@
     - name: Enable and Restart User service
       ansible.builtin.systemd:
         name: user
-        state: started
+        state: restarted
         enabled: yes
         daemon_reload: yes

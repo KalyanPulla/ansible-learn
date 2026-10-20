@@ -73,7 +73,7 @@
     - name: Start Catalogue service
       ansible.builtin.systemd_service:
         name: catalogue
-        state: started
+        state: restarted
         enabled: yes
         daemon_reload: yes
     
