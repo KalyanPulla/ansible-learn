@@ -1,1 +1,1 @@
-ansible-playbook -i '$1.kaldevops14.online,' $1.yml -e 'ansible_user=devops' -e 'ansible_password=devops@12345'
+ansible-playbook -i $1.kaldevops14.online, $1.yml -e ansible_user=devops -e ansible_password=devops@12345
