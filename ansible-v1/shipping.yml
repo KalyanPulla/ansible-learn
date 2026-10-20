@@ -19,7 +19,8 @@
       ansible.builtin.copy:
         src: shipping.service
         dest: /etc/systemd/system/shipping.service
-
+        
+    - name: Apply permissions and ownership
       ansible.builtin.user:
         name: appuser
         system: yes
