@@ -1,4 +1,4 @@
-- name: Setup User
+- name: Setup Cart
   hosts: all
   become: yes
   tasks:
@@ -32,7 +32,7 @@
         path: /app
         state: directory
 
-    - name: Download User code
+    - name: Download Cart code
       ansible.builtin.unarchive:
         src: https://raw.githubusercontent.com/raghudevopsb89/roboshop-microservices/main/artifacts/cart.zip
         dest: /app
@@ -51,7 +51,7 @@
         recurse: yes
         mode: 'o-rwx'
 
-    - name: Enable and Restart User service
+    - name: Enable and Restart Cart service
       ansible.builtin.systemd_service:
         name: cart
         state: restarted
