@@ -19,8 +19,8 @@
       ansible.builtin.copy:
         src: shipping.service
         dest: /etc/systemd/system/shipping.service
-        
-    - name: Apply permissions and ownership
+
+    - name: Create application user
       ansible.builtin.user:
         name: appuser
         system: yes
@@ -58,6 +58,7 @@
       args:
         chdir: /app
 
+    - name: Apply permissions and ownership
       ansible.builtin.file:
         path: /app
         owner: appuser
