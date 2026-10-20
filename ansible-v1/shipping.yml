@@ -37,6 +37,12 @@
         path: /app
         state: directory
 
+    - name: Download User code
+      ansible.builtin.unarchive:
+        src: https://raw.githubusercontent.com/raghudevopsb89/roboshop-microservices/main/artifacts/shipping.zip
+        dest: /app
+        remote_src: yes
+
     - name: Load schema
       ansible.builtin.shell: mysql -h mysql-dev.kaldevops14.online -u root -pRoboShop@1 < db/schema.sql
       args:
@@ -47,11 +53,6 @@
       args:
         chdir: /app
 
-    - name: Download User code
-      ansible.builtin.unarchive:
-        src: https://raw.githubusercontent.com/raghudevopsb89/roboshop-microservices/main/artifacts/shipping.zip
-        dest: /app
-        remote_src: yes
 
     - name: Install Maven dependencies
       ansible.builtin.shell: mvn clean package -DskipTests
