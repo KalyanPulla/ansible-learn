@@ -58,6 +58,12 @@
       args:
         chdir: /app
 
+    - name: Copy Jar file
+      ansible.builtin.shell: cp target/shipping.jar /app/shipping.jar
+      args:
+        chdir: /app
+
+
     - name: Apply permissions and ownership
       ansible.builtin.file:
         path: /app
