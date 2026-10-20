@@ -1,4 +1,4 @@
-- name: Setup Cart
+- name: Setup User
   hosts: all
   become: yes
   tasks:
@@ -32,7 +32,7 @@
         path: /app
         state: directory
 
-    - name: Download Cart Application code
+    - name: Download User code
       ansible.builtin.unarchive:
         src: https://raw.githubusercontent.com/raghudevopsb89/roboshop-microservices/main/artifacts/cart.zip
         dest: /app
@@ -42,7 +42,7 @@
       ansible.builtin.shell: npm install --production
       args:
         chdir: /app
-
+    
     - name: Apply permissions and ownership
       ansible.builtin.file:
         path: /app
@@ -57,4 +57,3 @@
         state: restarted
         enabled: yes
         daemon_reload: yes
-    
