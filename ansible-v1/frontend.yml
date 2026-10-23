@@ -1,4 +1,4 @@
-- name: Setup Frontend
+- name: Setup Frontend Component
   hosts: all
   become: yes
   tasks:
@@ -6,44 +6,46 @@
       ansible.builtin.dnf:
         name: nginx
         state: present
-    
-    - name: Copy Nginx configuration
+
+    - name: Copy ansible configuration file
       ansible.builtin.copy:
         src: nginx.conf
         dest: /etc/nginx/nginx.conf
 
-    # - name: Install Npm
-    #   ansible.builtin.shell: curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
+# Since npm build is failing, we moved to download the direct compiled code.
+#     - name: Setup NodeJS repo
+#       ansible.builtin.shell: curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
 
-    # - name: Install nodejs
-    #   ansible.builtin.dnf:
-    #     name: nodejs
-    #     state: present
+#     - name: Install NodejS
+#       ansible.builtin.dnf:
+#         name: nodejs
+#         state: present
 
-    - name: Remove application directory
+    - name: Remove App content folder
       ansible.builtin.file:
-        path: /usr/share/nginx/html/
+        path: /usr/share/nginx/html
         state: absent
 
-    - name: Create application directory
+    - name: Create App content folder
       ansible.builtin.file:
-        path: /usr/share/nginx/html/
+        path: /usr/share/nginx/html
         state: directory
 
-    - name: Download Frontend code
+    - name: Download frontend content
       ansible.builtin.unarchive:
         src: https://raw.githubusercontent.com/raghudevopsb89/roboshop-microservices/main/artifacts/frontend-compiled.zip
-        dest: /usr/share/nginx/html/
+        dest: /usr/share/nginx/html
         remote_src: yes
 
-    # - name: Compile and build using Npm
-    #   ansible.builtin.shell: npm cache clean --force ; npm install ; npm run build ; rm -rf /usr/share/nginx/html/* ; cp -r out/* /usr/share/nginx/html/
-    #   args:
-    #       chdir: "/tmp/frontend"
+# Since npm build is failing, we moved to download the direct compiled code.
+#     - name: Build static code
+#       ansible.builtin.shell: npm cache clean --force ; npm install ; npm run build ; rm -rf /usr/share/nginx/html/* ; cp -r out/* /usr/share/nginx/html/
+#       args:
+#         chdir: /tmp/frontend
 
-    - name: Start Nginx service
+    - name: Start Nginx
       ansible.builtin.systemd_service:
         name: nginx
         state: restarted
-        daemon_reload: true
-        enabled: true
+        enabled: yes
+
